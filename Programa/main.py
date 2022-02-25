@@ -1,16 +1,26 @@
-from classNewton import Newton
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Feb 16 11:42:55 2022
 
-Exemplo = Newton() #Instanciando classe
+@author: Anderson Sampaio
+"""
 
-Exemplo.setBarras(1, 1, 1.04, 0.00, 0 + 0 * 1j, 0 + 0 * 1j)
-Exemplo.setBarras(2, 2, 1.00, 0.00, 100e6 + 50e6 * 1j, 0 + 0 * 1j)
-Exemplo.setBarras(3, 3, 1.02, 0.00, 0 + 0 * 1j, 70e6 + 0 * 1j)
+#%% PROGRAMA PRINCIPAL
 
-Exemplo.printBarras()
-Exemplo.setSesp()
 
-Exemplo.ligacoes(1, 2, impedancia=0.05+0.4j)
-Exemplo.ligacoes(1, 3, impedancia=0.3+0.46j)
-Exemplo.ligacoes(2, 3, impedancia=0.01+0.09j)
 
-Exemplo.printLigacoes()
+#%% Leitura dos Dados
+from Read_Data import Read_Data
+
+# IMPORTANTE: Para que o programa funcione é preciso que altere o endereço abaixo de acordo com endereço onde
+# salvou o arquivo em seu PC
+path_pwf = r"G:\Meu Drive\1- DOUTORADO - UFJF\2021.3\Estudo Dirigido\Flow - Newton Raphson - Leitura Excel\CASES.xlsx"
+
+caso = 1  # 1 (24Barras)    2 (4barras)
+Dados_Sist = Read_Data(path_pwf, caso)
+
+
+#%% Fluxo de Potência Newton Raphson
+
+from Flow_Newton_Raphson import Flow
+Flupot = Flow(Dados_Sist.Sbase, Dados_Sist.df_DBAR, Dados_Sist.df_DLIN)
